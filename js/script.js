@@ -175,6 +175,34 @@ jQuery(document).ready(function() {
 		    owl3.trigger('prev.owl.carousel', [300]);
 		})
 	}
+
+
+	if(jQuery('.intro__slider').length > 0){
+		var owl4 = jQuery('.intro__slider');
+		owl4.owlCarousel({
+		    loop: true,
+		    autoplayTimeout:5000,
+		    nav: false,
+		    autoplay: true,
+		    rewind: true,
+		    dots: false,
+	        lazyLoad:true,
+			autoplayHoverPause:true,
+		  	margin: 0,
+		  	items: 1,
+		    animateOut: 'fadeOut',
+    		animateIn: 'fadeIn',
+		});
+		jQuery('.intro .arrow__next').click(function() {
+		    owl4.trigger('next.owl.carousel');
+		})
+		// Go to the previous item
+		jQuery('.conintro .arrow__prev').click(function() {
+		    owl4.trigger('prev.owl.carousel', [300]);
+		})
+
+		setInterval(function(){ jQuery('.intro .arrow__next').trigger('click') }, 3000);
+	}
 	
 	// Menu
 	jQuery('#dark-shadow').click(function(event) {

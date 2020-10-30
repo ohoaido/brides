@@ -410,70 +410,7 @@
 							float: left;
 						}
 					}
-				} 		
-				.short-link{
-					li{
-						float: left;
-						width: 100%;
-						+ li{
-							margin-top: 12px;
-						}
-						a{
-							display: block;
-							float: left;
-							line-height: 32px;
-							text-transform: uppercase;
-							font-size: 12px;
-							font-weight: 500;
-							color: #949494;
-							padding-left: 46px;
-							@include transition;
-							position: relative;
-							&:hover{
-								color: $color;
-								&:before{
-									opacity: 0;
-								}
-							}
-							&:before{
-								content: '';
-								display: block;
-								width: 32px;
-								height: 32px;
-								position: absolute;
-								left: 3px;
-								top: 0;
-								bottom: 0;
-								margin: auto;
-								@include transition;
-								z-index: 1;
-							}
-							&:after{
-								content: '';
-								display: block;
-								width: 32px;
-								height: 32px;
-								position: absolute;
-								left: 3px;
-								top: 0;
-								bottom: 0;
-								margin: auto;
-							}
-						}
-						&.book a:before{
-							background: url(../images/icon-3.png) no-repeat center /cover;
-						}
-						&.book a:after{
-							background: url(../images/icon-3-active.png) no-repeat center /cover;
-						}
-						&.visitor a:before{
-							background: url(../images/icon-4.png) no-repeat center /cover;
-						}
-						&.visitor a:after{
-							background: url(../images/icon-4-active.png) no-repeat center /cover;
-						}
-					}
-				}	
+				}
     		}
     		.language-mobile{
     			height: 42px;
@@ -660,6 +597,7 @@
 	right: 0;
 	opacity: 0;
 	visibility: hidden;
+	z-index: 9;
 	@include transition;
 	&.active{
 		opacity: 1;
