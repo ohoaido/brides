@@ -205,30 +205,48 @@ jQuery(document).ready(function() {
 	}
 	
 	// Menu
-	jQuery('#dark-shadow').click(function(event) {
-		jQuery('#header-responsive .bottoms .menu').removeClass('active');
-		jQuery('#header-responsive .bottoms .menu-mobile').removeClass('active');
-		jQuery(this).removeClass('active');
-    	jQuery('body').removeClass('none-scroll');		
+	if(jQuery(window).width() > 992) {
+		jQuery('#menu-active .menu').mCustomScrollbar({
+			theme: "dark",
+			advanced:{
+				autoExpandHorizontalScroll:true
+			}
+		});	
+	}
+
+	jQuery(window).resize(function(event) {
+		if(jQuery(window).width() > 992) {
+			jQuery('#menu-active .menu').mCustomScrollbar({
+				theme: "dark",
+				advanced:{
+					autoExpandHorizontalScroll:true
+				}
+			});	
+		} else {
+			jQuery('#menu-active .menu').mCustomScrollbar('destroy');
+		}
 	});
 
-    jQuery(document).on('click', '#header-responsive .bottoms .menu', function(event) {
-    	event.preventDefault();
-    	if(jQuery(this).hasClass('active')){
-    		jQuery(this).removeClass('active');
-    		jQuery(this).parent().find('.box-menu').removeClass('active');
-    		jQuery(this).parent().find('.menu-mobile').removeClass('active');
-    		jQuery('#dark-shadow').removeClass('active');
-    		jQuery('body').removeClass('none-scroll');
-    	} else {
-    		jQuery(this).addClass('active');
-    		jQuery(this).parent().find('.box-menu').addClass('active');
-    		jQuery(this).parent().find('.menu-mobile').addClass('active');
-    		jQuery('#header-responsive .bottoms .book, #header-responsive .bottoms .box-book').removeClass('active');
-    		jQuery('#dark-shadow').addClass('active');
-    		jQuery('body').addClass('none-scroll');
-    	}
-    });
+	jQuery('#header .hambuger__line, #header-responsive .toggle-action').click(function(event) {
+		/* Act on the event */
+		jQuery('#menu-active').addClass('active');
+		jQuery('#dark-shadow').addClass('active');
+		jQuery('body').addClass('none-scroll');		
+	});
+
+	jQuery('#menu-active .close__menu').click(function(event) {
+		/* Act on the event */
+		jQuery('#menu-active').removeClass('active');
+		jQuery('#dark-shadow').removeClass('active');
+		jQuery('body').removeClass('none-scroll');		
+	});
+
+
+	jQuery('#dark-shadow').click(function(event) {
+		jQuery(this).removeClass('active');
+		jQuery('#menu-active').removeClass('active');
+    	jQuery('body').removeClass('none-scroll');		
+	});
 });
 
 function header(){
