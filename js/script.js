@@ -149,7 +149,6 @@ jQuery(document).ready(function() {
 		})
 	}
 
-
 	if(jQuery('.content-albums .box__sliders').length > 0){
 		var owl3 = jQuery('.content-albums .box__sliders');
 		owl3.owlCarousel({
@@ -176,7 +175,6 @@ jQuery(document).ready(function() {
 		})
 	}
 
-
 	if(jQuery('.intro__slider').length > 0){
 		var owl4 = jQuery('.intro__slider');
 		owl4.owlCarousel({
@@ -202,6 +200,70 @@ jQuery(document).ready(function() {
 		})
 
 		setInterval(function(){ jQuery('.intro .arrow__next').trigger('click') }, 3000);
+	}	
+
+	if(jQuery('.content-grid2-slider').length > 0){
+		var owl5 = jQuery('.content-grid2-slider .left__slider');
+		owl5.owlCarousel({
+		    loop: false,
+		    autoplayTimeout:5000,
+		    nav: false,
+		    autoplay: false,
+		    rewind: true,
+		    dots: false,
+	        lazyLoad:true,
+			autoplayHoverPause:true,
+		  	autoplaySpeed: 700,
+		  	navSpeed: 700,
+		  	dragEndSpeed: 700,
+		  	items: 1,
+		    animateOut: 'fadeOut',
+    		animateIn: 'fadeIn',
+		});
+		var owl6 = jQuery('.content-grid2-slider .right__slider');
+		owl6.owlCarousel({
+		    loop: false,
+		    autoplayTimeout:5000,
+		    nav: false,
+		    autoplay: false,
+		    rewind: true,
+		    dots: false,
+	        lazyLoad:true,
+			autoplayHoverPause:true,
+		  	autoplaySpeed: 700,
+		  	navSpeed: 700,
+		  	dragEndSpeed: 700,
+		  	items: 1,
+		    animateOut: 'fadeOut',
+    		animateIn: 'fadeIn',
+    		onInitialized: setOwlStageHeight,
+		    onResized: setOwlStageHeight,
+		    onTranslated: setOwlStageHeight,  
+		});	
+
+	    function setOwlStageHeight(event) {
+		    var maxHeight = 0;
+		    jQuery('.content-grid2-slider .right__slider .owl-item').each(function () { // LOOP THROUGH ACTIVE ITEMS
+		        var thisHeight = parseInt( jQuery(this).height() );
+		        maxHeight=(maxHeight>=thisHeight?maxHeight:thisHeight);
+		    });
+		    if(jQuery(window).width() > 992){		    	
+			    jQuery('.content-grid2-slider .right__slider .owl-item').css('height', maxHeight);
+			    jQuery('.content-grid2-slider .left__slider .owl-item').css('height', maxHeight);
+		    }
+		}		
+
+		jQuery('.content-grid2-slider .arrow__next').click(function() {
+		    owl5.trigger('next.owl.carousel');
+		    owl6.trigger('next.owl.carousel');
+		})
+		// Go to the previous item
+		jQuery('.content-grid2-slider .arrow__prev').click(function() {
+		    // With optional speed parameter
+		    // Parameters has to be in square bracket '[]'		    
+		    owl5.trigger('prev.owl.carousel', [300]);
+		    owl6.trigger('prev.owl.carousel', [300]);
+		})
 	}
 	
 	// Menu
