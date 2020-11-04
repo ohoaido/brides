@@ -11,14 +11,17 @@
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/owl.theme.default.min.css">
 	<link rel="stylesheet" href="css/animate.min.css">
+	<link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
 	<link rel="stylesheet" href="css/font.css">
 	<link rel="stylesheet" href="css/style.css">
 	<script src="js/jquery.js"></script>
+	<script src="js/moment.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/wow.js"></script>
 	<script src="js/jquery.mCustomScrollbar.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/bootstrap-datetimepicker.min.js"></script>
 	<script src="js/script.js"></script>
 </head>
 <body>
@@ -44,7 +47,7 @@
 			<div class="header_box">
 				<div class="logo">
 					<a href="#" title="">
-						<img src="images/logo.svg" alt="Logo">
+						<img src="images/logo.png" alt="Logo">
 					</a>
 				</div>
 				<div class="menu">
@@ -70,6 +73,12 @@
 							</a>
 						</li>
 					</ul>
+				</div>
+
+				<div class="flag__book">
+					<div class="flag__book__box">						
+						<span class="md-trigger" data-modal="#book">REQUEST AN APPOINTMENT</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -556,7 +565,7 @@
 		</div>
 
 		<div class="bottom">
-			<div class="togger__form md-trigger" data-modal="#app">
+			<div class="togger__form md-trigger" data-modal="#book">
 				REQUEST AN APPOINTMENT
 			</div>				
 
@@ -606,5 +615,170 @@
 	</div><!-- /header -->
 	
     <div id="dark-shadow"></div>
+
+    <!-- Book  -->
+    <div class="md-modal md-effect-1 full__width" id="book">
+        <div class="md-content">
+            <span class="md-close" title="Close Popup">
+            	<span></span>
+            	<span></span>
+            </span>
+            <div class="book__form">
+            	<div class="book__logo">
+            		<img src="images/bg__logo__gray.png" alt="Logo">
+            	</div>
+            	<form action="index_submit" method="get" accept-charset="utf-8">
+            		<h2 class="form__title">Request an Appointment</h2>
+
+            		<div class="form__text">
+            			<p>Please provide us with the following information so that an expert adviser can contact you to confirm the details of your appointment and explain to you that, in order to ensure the Brides experience remains a magical and unforgettable one: all the firm’s points of sale follow measures that guarantee the utmost safety of the bride and guests. Discover the protocol for safety and hygiene * in Brides stores in the Brides section of the website.</p>
+            		</div>
+
+            		<div class="group">
+            			<label>Fill in your contact details</label>
+            			<div class="col__2">
+            				<div class="col__2">
+            					<input type="text" name="" placeholder="Name">
+            				</div>
+            				<div class="col__2">
+            					<input type="text" name="" placeholder="Surname">
+            				</div>
+            			</div>
+
+            			<div class="col__2">
+            				<div class="col__2">
+            					<input type="email" name="" placeholder="Email">
+            				</div>
+            				<div class="col__2">
+            					<input type="text" name="" placeholder="Tel">
+            				</div>
+            			</div>
+            		</div>
+
+            		<div class="group">
+            			<div class="col__2">
+	            			<label style="height: 44px;">Choose the dress type</label>
+            				<div class="group__select">
+            					<span class="line__top"></span>
+            					<span class="line__left"></span>
+            					<span class="line__right"></span>
+								<div class="box__option__text">
+									Select dress type
+								</div>
+
+								<div class="box__option__text__dropdown">	
+	            					<span class="line__left"></span>
+	            					<span class="line__right"></span>								
+	            					<span class="line__bottom"></span>
+									<ul class="no-style">
+										<li class="show" style="display: list-item;">Bridal</li>
+										<li class="show" style="display: list-item;">Cocktail</li>
+										<li class="show" style="display: list-item;">First Communion</li>
+									</ul>
+								</div>   			
+
+		    					<select name="dress_type" class="hide">
+		    						<option value="" selected="" disabled="">Select dress type</option>
+		    						<option value="Bridal">Bridal</option>
+		    						<option value="Cocktail">Cocktail</option>
+		    						<option value="First Communion">First Communion</option>
+		    					</select>
+
+		    					<script>		    						
+									jQuery(document).ready(function($) {
+										jQuery('.box__option__text').click(function(event) {
+											event.stopPropagation();
+											jQuery('.group__select').removeClass('active');
+											jQuery(this).parent().toggleClass('active');	
+										});
+										jQuery('.box__option__text__dropdown').click(function(event) {		
+											event.stopPropagation();
+										});
+										jQuery('.box__option__text__dropdown li').click(function() {
+											jQuery(this).closest('.group__select').find('.box__option__text').text(jQuery(this).text());
+											jQuery('.group__select').removeClass('active');	
+											jQuery('select[name=contact_type]').val(jQuery(this).text());
+										});
+										jQuery('html, body').click(function(event) {
+											/* Act on the event */	
+											if(jQuery('.group__select').hasClass('active')){
+												jQuery('.group__select').removeClass('active');
+											}			
+										});
+									});
+		    					</script>
+							</div>
+            			</div>
+
+            			<div class="col__2">
+            				<div class="col__2">
+		            			<label>When will the event be celebrated?</label>
+            					<input type="text" name="" id="event" value="4/11/2020">
+            				</div>
+            				<div class="col__2">
+		            			<label>Select your preferred appointment date</label>
+            					<input type="text" name="" id="date" value="4/11/2020">
+            				</div>
+            			</div>
+
+					    <script>
+					    	jQuery(document).ready(function($) {
+					    		if(jQuery('#date').length > 0){
+									jQuery('#date').datetimepicker({
+										format:'MM/DD/YYYY',
+										widgetPositioning: {
+								            horizontal: 'left',
+								            vertical: 'bottom'
+								        },
+										icons:{time:"fa fa-clock-o",date:"fa fa-calendar",up:"fa fa-chevron-up",down:"fa fa-chevron-down",previous:'fa fa-chevron-left',next:'fa fa-chevron-right',today:'fa fa-screenshot',clear:'fa fa-trash',close:'fa fa-remove',
+										inline:!0},
+									});
+
+									if(jQuery(window).width() < 768){
+										jQuery('#date').attr('type', 'date');
+										jQuery('#date').datetimepicker( "destroy" );
+									}
+								}
+					    		if(jQuery('#event').length > 0){
+									jQuery('#event').datetimepicker({
+										format:'MM/DD/YYYY',
+										widgetPositioning: {
+								            horizontal: 'left',
+								            vertical: 'bottom'
+								        },
+										icons:{time:"fa fa-clock-o",date:"fa fa-calendar",up:"fa fa-chevron-up",down:"fa fa-chevron-down",previous:'fa fa-chevron-left',next:'fa fa-chevron-right',today:'fa fa-screenshot',clear:'fa fa-trash',close:'fa fa-remove',
+										inline:!0},
+									});
+
+									if(jQuery(window).width() < 768){
+										jQuery('#event').attr('type', 'date');
+										jQuery('#event').datetimepicker( "destroy" );
+									}
+								}
+					    	});
+					    </script>
+            		</div>
+
+            		<div class="group">
+            			<div class="col__2">
+            				<div class="item__checkbox">
+            					<input type="checkbox" name="robot" id="robot" required>
+            					<label for="robot">I’m not a robot</label>
+            				</div>
+            				<div class="item__checkbox">
+            					<input type="checkbox" name="retrive" id="retrive">
+            					<label for="retrive">Yes, I would like to receive invitations to exclusive events and promotions, trends, brand news and surveys to express my opinion.</label>
+            				</div>
+            			</div>
+            		</div>
+
+            		<div class="group" style="margin-bottom: 0;">
+            			<input type="submit" name="" value="Send">
+            		</div>
+            	</form>
+            </div>
+        </div>
+    </div>
+    <div class="md-darknight"></div><!-- the overlay element -->
 </body>
 </html>
